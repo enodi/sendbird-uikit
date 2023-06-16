@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChannelList, SendBirdProvider, Channel } from "@sendbird/uikit-react"
+import { ChannelList, SendBirdProvider, Channel, OpenChannel } from "@sendbird/uikit-react"
 import "@sendbird/uikit-react/dist/index.css";
 
 import IconArrowLeft from "./icon-arrow-left.svg";
@@ -39,6 +39,7 @@ function App() {
         {channel ? (
           <Channel
             channelUrl={channel.url}
+            renderChannelHeader={() => <ChatHeader channel={channel} onBack={onBack} />}
           />
         ) : (
           <ChannelList
@@ -57,13 +58,13 @@ function App() {
   );
 }
 
-const ChatHeader = ({ channel, user, onBack }) => (
+const ChatHeader = ({ channel, onBack }) => (
   <div className="custom-channel-header">
     <button onClick={onBack}>
       <img width={20} heigth={20} src={IconArrowLeft} alt="Back button" />
     </button>
     <span>{channel.name}</span>
-    <span>{user.nickname}</span>
+    <span></span>
   </div>
 );
 
